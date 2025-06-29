@@ -4,6 +4,8 @@
 #include <moveit_msgs/DisplayTrajectory.h>
 #include <geometry_msgs/Pose.h>
 #include <moveit_visual_tools/moveit_visual_tools.h>
+// #include <trajectory_processing/iterative_parabolic_time_parameterization.h>
+
 
 
 int main(int argc, char** argv)
@@ -15,8 +17,6 @@ int main(int argc, char** argv)
 
   // Move group for panda arm
   moveit::planning_interface::MoveGroupInterface move_group("panda_arm");
-
-  
 
 
   move_group.setEndEffectorLink("panda_hand_tcp");  // This is the TCP for Franka
@@ -30,26 +30,53 @@ int main(int argc, char** argv)
   visual_tools.deleteAllMarkers();
 
   ROS_INFO("Waiting for RViz to subscribe to /rviz_visual_tools...");
-  ros::Duration(10).sleep();
+  ros::Duration(5).sleep();
   
   move_group.setPlanningTime(10.0);
 
   // Example: Create a circular trajectory in XY-plane
   std::vector<geometry_msgs::Pose> waypoints;
   geometry_msgs::Pose start_pose = move_group.getCurrentPose().pose;
-
+  ROS_INFO("Start pose position: [x: %f, y: %f, z: %f]",
+          start_pose.position.x,
+          start_pose.position.y,
+          start_pose.position.z);
 
 
   double radius = 0.1; // 10cm
-  int num_points = 50;
-  for (int i = 0; i < num_points; ++i)
+  int num_points = 300;
+  double center_x = start_pose.position.x - radius;
+  double center_y = start_pose.position.y;
+
+  for (int i = 1; i < num_points; ++i)
   {
     double angle = 2 * M_PI * i / num_points;
     geometry_msgs::Pose target = start_pose;
-    target.position.x += radius * cos(angle);
-    target.position.y += radius * sin(angle);
+    target.position.x = center_x + radius * cos(angle);
+    target.position.y = center_y + radius * sin(angle);
     waypoints.push_back(target);
   }
+  // for (size_t i = 0; i < waypoints.size(); ++i)
+  // {
+  //   const auto& wp = waypoints[i];
+  //   ROS_INFO("Waypoint %zu:", i);
+  //   ROS_INFO("  Position: [x: %f, y: %f, z: %f]", 
+  //           wp.position.x, wp.position.y, wp.position.z);
+  // }
+
+
+  // double center_x = start_pose.position.x;
+  // double center_y = start_pose.position.y;
+
+  // for (int i = 0; i < num_points; ++i)
+  // {
+  //   double angle = 2 * M_PI * i / num_points;
+  //   geometry_msgs::Pose target = start_pose;
+  //   target.position.x = center_x + radius * cos(angle);
+  //   target.position.y = center_y + radius * sin(angle);
+  //   waypoints.push_back(target);
+  // }
+
   // // Visualize waypoints
   // for (size_t i = 0; i < waypoints.size(); ++i)
   // {
@@ -71,6 +98,19 @@ int main(int argc, char** argv)
   double fraction = move_group.computeCartesianPath(waypoints, eef_step, jump_threshold, trajectory);
 
   ROS_INFO("Path computed with %.2f%% success", fraction * 100.0);
+
+  // Time parameterization
+  // robot_trajectory::RobotTrajectory rt(move_group.getCurrentState()->getRobotModel(), "panda_arm");
+  // rt.setRobotTrajectoryMsg(*move_group.getCurrentState(), trajectory);
+
+  // trajectory_processing::IterativeParabolicTimeParameterization iptp;
+  // bool success = iptp.computeTimeStamps(rt);
+  // ROS_INFO("Computed time stamps: %s", success ? "SUCCESS" : "FAILURE");
+
+  // // Update trajectory with new timestamps
+  // rt.getRobotTrajectoryMsg(trajectory);
+
+
 
   // Execute the trajectory
   moveit::planning_interface::MoveGroupInterface::Plan plan;

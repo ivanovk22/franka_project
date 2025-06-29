@@ -1,0 +1,7 @@
+<launch>
+  <!-- Start MoveIt RViz demo -->
+  <include file="$(find panda_moveit_config)/launch/demo_gazebo.launch"/>
+
+  <!-- Launch your trajectory node -->
+  <!-- <node pkg="franka_trajectory_exec" type="circle_trajectory_node" name="circle_trajectory_node" output="screen" /> -->
+</launch>

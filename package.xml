@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>franca_project</name>
+  <name>franka_project</name>
   <version>0.0.0</version>
   <description>The franka_project package</description>
 

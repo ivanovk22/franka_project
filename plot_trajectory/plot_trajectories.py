@@ -9,7 +9,7 @@ from mpl_toolkits.mplot3d import Axes3D
 radius = 0.1  # 10 cm
 # the real start pose is x = 0.306891, y = -0.0, z = 0.486882 (taken from the execution of cicrle_trajectory.cpp)
 # x is shifter with 0.1(the radius) to match the robot's circle center. The robot draws the circle
-# from where it is initially positioned, so actually the x coorddinate of the 
+# from where it is initially positioned, so actually the x coorddinate of the
 # center of the circle is x - radius
 center = [0.206891, 0.0, 0.486882]
 theta = np.linspace(0, 2*np.pi, 300)

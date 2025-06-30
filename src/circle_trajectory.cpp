@@ -33,7 +33,6 @@ int main(int argc, char** argv)
   
   move_group.setPlanningTime(10.0);
 
-  // Example: Create a circular trajectory in XY-plane
   std::vector<geometry_msgs::Pose> waypoints;
   geometry_msgs::Pose start_pose = move_group.getCurrentPose().pose;
   ROS_INFO("Start pose position: [x: %f, y: %f, z: %f]",

@@ -56,6 +56,7 @@ int main(int argc, char** argv)
     target.position.y = center_y + radius * sin(angle);
     waypoints.push_back(target);
   }
+
   
   visual_tools.publishPath(waypoints, rvt::LIME_GREEN, rvt::SMALL);
   visual_tools.trigger();

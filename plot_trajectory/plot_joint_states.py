@@ -5,11 +5,12 @@ import numpy as np
 
 bag = rosbag.Bag('trajectory_positions.bag')
 
+
 times = []
 positions = []
 velocities = []
 
-for topic, msg, t in bag.read_messages(topics=['joint_states']):
+for topic, msg, t in bag.read_messages(topics='/joint_states'):
     times.append(t.to_sec())
     positions.append(msg.position)  
     if len(msg.velocity) == len(msg.position) and len(msg.velocity) > 0:

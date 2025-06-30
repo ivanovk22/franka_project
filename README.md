@@ -14,7 +14,8 @@ demonstrating how to plan and execute a simple **circular end-effector trajector
 ### How to run
 ```bash
 - cd ~/ws_moveit/src
-- Download the code or clone it with: git clone https://github.com/ivanovk22/franka_project.git
+'Download the code and paste it in /ws_moveit/src or clone it with:'
+- git clone https://github.com/ivanovk22/franka_project.git
 - cd ~/ws_moveit
 - catkin build
 - source ~/ws_moveit/devel/setup.bash
@@ -55,5 +56,4 @@ The python script creates a .npz file(the name can be changed from the code, def
 - cd ~/ws_moveit/src/franka_project/plot_trajectory
 - python3 plot_trajectories.py
 ```
-
 

@@ -33,7 +33,7 @@ After having the package already installed:
 ```bash
 'Open terminal 1:'
 - cd ~/ws_moveit/src/franka_project/plot_trajectory
-- rosbag record -O trajectory_positions \tf \tf_static \joint_states
+- rosbag record -O trajectory_positions /tf /tf_static /joint_states
 
 'Open terminal 2:'
 - roslaunch franka_project gazebo.launch

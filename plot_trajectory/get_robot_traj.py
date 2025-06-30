@@ -5,6 +5,10 @@ import time
 import numpy as np
 
 
+############ To be run after running: rosbag play trajectory_positions.bg ############
+########### After rosbag execution is DONE, stop the script with Ctrl + C ###########
+########### Then in order to plot the trajectory, use plot_trajectory.py ############
+
 rospy.init_node('ee_pose_listener')
 
 tf_buffer = tf2_ros.Buffer()

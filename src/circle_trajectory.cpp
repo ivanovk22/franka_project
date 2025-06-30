@@ -4,7 +4,6 @@
 #include <moveit_msgs/DisplayTrajectory.h>
 #include <geometry_msgs/Pose.h>
 #include <moveit_visual_tools/moveit_visual_tools.h>
-// #include <trajectory_processing/iterative_parabolic_time_parameterization.h>
 
 
 
@@ -45,6 +44,8 @@ int main(int argc, char** argv)
 
   double radius = 0.1; // 10cm
   int num_points = 300;
+  // In order to start the trajectory from the start_pose we need to calculate where the center should be
+  // which is done by subtracting the radius from the x coordinate
   double center_x = start_pose.position.x - radius;
   double center_y = start_pose.position.y;
 
@@ -56,36 +57,7 @@ int main(int argc, char** argv)
     target.position.y = center_y + radius * sin(angle);
     waypoints.push_back(target);
   }
-  // for (size_t i = 0; i < waypoints.size(); ++i)
-  // {
-  //   const auto& wp = waypoints[i];
-  //   ROS_INFO("Waypoint %zu:", i);
-  //   ROS_INFO("  Position: [x: %f, y: %f, z: %f]", 
-  //           wp.position.x, wp.position.y, wp.position.z);
-  // }
-
-
-  // double center_x = start_pose.position.x;
-  // double center_y = start_pose.position.y;
-
-  // for (int i = 0; i < num_points; ++i)
-  // {
-  //   double angle = 2 * M_PI * i / num_points;
-  //   geometry_msgs::Pose target = start_pose;
-  //   target.position.x = center_x + radius * cos(angle);
-  //   target.position.y = center_y + radius * sin(angle);
-  //   waypoints.push_back(target);
-  // }
-
-  // // Visualize waypoints
-  // for (size_t i = 0; i < waypoints.size(); ++i)
-  // {
-  //   visual_tools.publishAxisLabeled(waypoints[i], "pt" + std::to_string(i));
-  // }
-  // visual_tools.publishPath(waypoints, rvt::LIME_GREEN, rvt::SMALL);
-  // visual_tools.trigger();
-  // Visualize planned path
-  // visual_tools.publishAxisLabeled(start_pose, "start");
+  
   visual_tools.publishPath(waypoints, rvt::LIME_GREEN, rvt::SMALL);
   visual_tools.trigger();
 
@@ -98,18 +70,6 @@ int main(int argc, char** argv)
   double fraction = move_group.computeCartesianPath(waypoints, eef_step, jump_threshold, trajectory);
 
   ROS_INFO("Path computed with %.2f%% success", fraction * 100.0);
-
-  // Time parameterization
-  // robot_trajectory::RobotTrajectory rt(move_group.getCurrentState()->getRobotModel(), "panda_arm");
-  // rt.setRobotTrajectoryMsg(*move_group.getCurrentState(), trajectory);
-
-  // trajectory_processing::IterativeParabolicTimeParameterization iptp;
-  // bool success = iptp.computeTimeStamps(rt);
-  // ROS_INFO("Computed time stamps: %s", success ? "SUCCESS" : "FAILURE");
-
-  // // Update trajectory with new timestamps
-  // rt.getRobotTrajectoryMsg(trajectory);
-
 
 
   // Execute the trajectory

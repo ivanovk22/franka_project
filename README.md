@@ -11,6 +11,9 @@ demonstrating how to plan and execute a simple **circular end-effector trajector
 - **CMake.txt**
 - **package.xml**
 
+### RViz requirement(for showing the trajectory):
+- Add the MarkerArray and set the topic name to: rviz_visual_tools
+
 ### How to run
 ```bash
 - cd ~/ws_moveit/src

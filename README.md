@@ -1,7 +1,7 @@
 # Executing a Trajectory with the Franka Robot in Gazebo
 
 This repository provides a complete ROS-Gazebo simulation for the **Franka Panda robot**,
-demonstrating how to plan and execute a simple **circular end-effector trajectory** using MoveIt!
+demonstrating how to plan and execute a **circular end-effector trajectory** using MoveIt!
 
 ### Structure
 

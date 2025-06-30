@@ -46,7 +46,7 @@ Then stop the roslaunch process in terminal 2.'
 'In terminal 3:'
 - python3 ~/ws_moveit/src/franka_project/plot_trajectory/get_robot_traj.py
 'In terminal 1:'
-- rosbag play filename.bat
+- rosbag play trajectory_positions.bag
 
 'After compilation of rosbag play, do Ctrl+C in terminal 3(stop the python script)
 The python script creates a .npz file(the name can be changed from the code, default is robot_traj.npz)'

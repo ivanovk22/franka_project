@@ -1,7 +1,7 @@
 # Executing a Trajectory with the Franka Robot in Gazebo
 
 This repository provides a complete ROS-Gazebo simulation for the **Franka Panda robot**,
-demonstrating how to plan and execute a **circular end-effector trajectory** using MoveIt!
+demonstrating how to plan and execute a simple **circular end-effector trajectory** using MoveIt!
 
 ### Structure
 
@@ -30,7 +30,7 @@ After having the package already installed:
 ```bash
 'Open terminal 1:'
 - cd ~/ws_moveit/src/franka_project/plot_trajectory
-- rosbag record -O filename.bat \tf \tf_static
+- rosbag record -O trajectory_positions \tf \tf_static \joint_states
 
 'Open terminal 2:'
 - roslaunch franka_project gazebo.launch
@@ -55,5 +55,10 @@ The python script creates a .npz file(the name can be changed from the code, def
 'Remark: If you create a new .npz file, change the name in the plot_trajectory.py to the new .npz file name(line 35)'
 - cd ~/ws_moveit/src/franka_project/plot_trajectory
 - python3 plot_trajectories.py
+
+'In order to plot the joint states use plot_joint_states.py'
+'Remark: If the name of the .bag file is different from trajectory_positions.bag, change the name in the file '
+- cd ~/ws_moveit/src/franka_project/plot_trajectory
+- python3 plot_joint_states.py
 ```
 

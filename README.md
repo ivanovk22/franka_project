@@ -7,7 +7,7 @@ demonstrating how to plan and execute a simple **circular end-effector trajector
 
 - **launch/**: Starts the robot, simulation, and visualization tools.
 - **src/**: The circle_trajectory.cpp which executes the trajectory.
-- **plot_trajectory/**: Python scripts for saving and plotting the trajectories + already created .bat file, .npz and plots
+- **plot_trajectory/**: Python scripts for saving and plotting the trajectories + already created .bag file, .npz and plots
 - **CMake.txt**
 - **package.xml**
 
